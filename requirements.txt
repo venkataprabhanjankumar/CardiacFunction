@@ -1,6 +1,7 @@
 Django==4.0.3
 djangorestframework==3.13.1
 opencv-python==4.5.2.54
+opencv-python-headless==4.5.5.64
 python-decouple==3.6
 gunicorn==19.9.0
 django-utils-six==2.0
