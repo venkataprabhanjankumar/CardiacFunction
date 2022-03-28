@@ -55,8 +55,8 @@ CORS_ALLOW_METHODS = list(default_methods) + ['GET', 'POST', 'POST', 'DELETE'
 
 SESSION_COOKIE_SECURE = True
 
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 MIDDLEWARE = [
@@ -126,3 +126,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# FILE_UPLOAD_TEMP_DIR = 'temp/'
+
+# FILE_UPLOAD_HANDLERS = ["django.core.files.uploadhandler.MemoryFileUploadHandler","django.core.files.uploadhandler.TemporaryFileUploadHandler"]
