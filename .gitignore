@@ -3,3 +3,5 @@
 /CardiacFunction/__pycache__
 /assesment/__pycache__
 /temp
+./cert.pem
+./key.pem
