@@ -21,7 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'assesment.apps.AssesmentConfig',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'sslserver'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
