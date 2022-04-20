@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 from tensorflow_addons.metrics.r_square import RSquare
 import tensorflow as tf
+import pickle
 
 
 @api_view(['POST'])
@@ -36,7 +37,7 @@ def get_result(request):
                     fcount = 0
         data = np.array(seconds_data)
         for each in data:
-            cmodel = tf.saved_model.load('./model')
+            cmodel = tf.saved_model.load('./model/dnn')
             model_input = tf.constant(each, dtype=tf.float32)[tf.newaxis, ...]
             predicted = cmodel(model_input)
             predicted_result.append(predicted.numpy()[0][0])
@@ -48,3 +49,27 @@ def get_result(request):
         return HttpResponse(json.dumps({'status': 'ok', 'ejection_fraction': final_result}))
     else:
         return HttpResponse(json.dumps({'status': 'notok'}))
+
+
+@api_view(['POST'])
+def get_cls(request):
+    try:
+        age = float(request.POST.get('age'))
+        anaemia = int(request.data.get('anaemia'))
+        diabetes = int(request.data.get('diabetes'))
+        ejection_fraction = float(request.data.get('ejection_fraction'))
+        hbp = int(request.data.get('hbp'))
+        sex = int(request.data.get('sex'))
+        smoking = int(request.data.get('smoking'))
+        time = int(request.data.get('time'))
+    except Exception as e:
+        print(e)
+        return HttpResponse(json.dumps({'status': 'notok','msg': 'Invalid Data'}))
+    with open('./model/clsmodel', 'rb') as f:
+        cls = pickle.load(f)
+        cls_input = np.array([[age, anaemia, diabetes, ejection_fraction, hbp, sex, smoking, time]])
+        prediction = cls.predict(cls_input)
+        print(prediction)
+        result = prediction[0]
+        print(result)
+        return HttpResponse(json.dumps({'status': 'ok', 'cls': int(result)}))

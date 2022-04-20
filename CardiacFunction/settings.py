@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'assesment.apps.AssesmentConfig',
     'rest_framework',
     'corsheaders',
+    'sslserver'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
